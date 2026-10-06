@@ -66,7 +66,16 @@ https://github.com/yangwenjie1231/Cell-Vision-Models/releases/download/v1
 ### 代价：Gitee 不自动同步 Release
 
 Gitee 的「仓库镜像」只同步 **git 内容**（代码/README），**不会同步 Release 及其附件**。
-所以每次在 GitHub 发了新 release 后，需要在 Gitee **手动建一个同名 tag 的 release 并上传附件**：
+所以每次在 GitHub 发了新 release 后，需要在 Gitee **补传一次附件**。
+
+推荐用应用仓库里的脚本自动完成（会建 release、传附件、并验证下载地址）：
+
+```bash
+# 在应用仓库（Cell-Vision-Pro-v2）根目录执行，凭据从该仓库的 .env 读取
+bash scripts/publish-model-to-gitee.sh resources/models/<模型>.onnx v1
+```
+
+也可以手动操作：
 
 1. 打开 <https://gitee.com/ywjgame/Cell-Vision-Models/releases/new>
 2. Tag 填 `v1`（与 GitHub 保持一致，应用按这个路径拼地址）
@@ -74,6 +83,9 @@ Gitee 的「仓库镜像」只同步 **git 内容**（代码/README），**不�
 4. 发布
 
 > 如果 Gitee release 还没建好，应用会自动回退到 GitHub 源（国内可能较慢或被墙）。
+
+> 完整的发布流程（含导出、WebGPU 实测、应用侧登记、发布检查清单）见应用仓库的
+> `doc/version-management.md` →「📦 模型权重的发布（随应用一起发布）」。
 
 
 ## ⚠️ 关于 `realesrgan_x2_v1` 的重要提醒
