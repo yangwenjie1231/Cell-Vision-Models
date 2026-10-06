@@ -1,0 +1,33 @@
+{
+  "$comment": "YWJCell 用户端推理模型清单。应用按 ai.model.downloadBase + '/' + file 下载。",
+  "version": 1,
+  "basePath": "https://github.com/yangwenjie1231/Cell-Vision-Models/releases/download/v1",
+  "mirrorHint": "国内可换成 Gitee 对应 release 地址；保持文件名一致即可。",
+  "models": [
+    {
+      "modelId": "realesrgan_x2_v1",
+      "file": "realesrgan_x2_v1.onnx",
+      "name": "Real-ESRGAN x2",
+      "type": "stitching_enhance",
+      "backend": "webgpu",
+      "size": 67073379,
+      "sha256": "8c585725403a52b50b2cc883042c29a3add0f8c3c35e4e98dc51f113d9a293d5",
+      "license": "BSD-3-Clause",
+      "source": "https://huggingface.co/ai-forever/Real-ESRGAN",
+      "note": "GAN 生成式超分，仅用于显示增强，不可用于定量分析。默认关闭。",
+      "io": {
+        "input": "input: [1, 3, 'h', 'w']",
+        "output": "output: [1, 3, 'h', 'w']",
+        "irVersion": 7,
+        "opset": 13
+      },
+      "verified": {
+        "ep": "webgpu",
+        "sessionMs": 1352,
+        "inferenceMs": 1233,
+        "at": "128x128 -> 256x256",
+        "date": "2026-10-04"
+      }
+    }
+  ]
+}
