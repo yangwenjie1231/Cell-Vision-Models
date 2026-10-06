@@ -29,27 +29,52 @@ realesrgan_x2_v1.onnx
 
 ## 下载地址
 
-应用通过 `ai.model.downloadBase` 设置项拼接下载地址，格式为：
+应用通过 `ai.model.download_base` 设置项拼接下载地址，格式为：
 
 ```
 <downloadBase>/<modelId>.onnx
 ```
 
-默认指向本仓库的 release：
+该设置项**支持多个地址**（逗号或换行分隔），应用会**按顺序回退** ——
+默认是 Gitee 优先、GitHub 兜底：
 
 ```
+https://gitee.com/ywjgame/Cell-Vision-Models/releases/download/v1,
 https://github.com/yangwenjie1231/Cell-Vision-Models/releases/download/v1
 ```
 
 ### 国内镜像（Gitee）
 
-把 `ai.model.downloadBase` 改成镜像的对应地址即可，例如：
+镜像仓库：<https://gitee.com/ywjgame/Cell-Vision-Models>
 
-```
-https://gitee.com/<你的用户名>/cell-vision-models/releases/download/v1
-```
+## ⚠️ 为什么模型走 Release 附件，而不是直接放进仓库
 
-镜像目录里保持**同名文件**即可，应用无需改动。
+**Gitee 社区版有硬性配额限制**（[官方配额说明](https://help.gitee.com/account/usage-quota)）：
+
+| 配额项 | 限制 | 本模型（64.0 MB） |
+|---|---|---|
+| 仓库**单文件**大小 | **50 MB** | ❌ 超限，放不进仓库 |
+| 仓库单仓库容量 | 500 MB | |
+| **附件**单文件大小 | **100 MB** | ✅ 可以 |
+| 附件单仓库总容量 | 1 GB | |
+
+所以：**模型放不进 Gitee 仓库**（64MB > 50MB），但可以走 **Release 附件**（上限 100MB）。
+
+另外即使放得进，也不建议：git 历史会**永久保留每个版本的模型**，换一次模型仓库就只增不减
+（Gitee 个人总容量才 5GB）。
+
+### 代价：Gitee 不自动同步 Release
+
+Gitee 的「仓库镜像」只同步 **git 内容**（代码/README），**不会同步 Release 及其附件**。
+所以每次在 GitHub 发了新 release 后，需要在 Gitee **手动建一个同名 tag 的 release 并上传附件**：
+
+1. 打开 <https://gitee.com/ywjgame/Cell-Vision-Models/releases/new>
+2. Tag 填 `v1`（与 GitHub 保持一致，应用按这个路径拼地址）
+3. 上传附件 `realesrgan_x2_v1.onnx`（文件名必须完全一致）
+4. 发布
+
+> 如果 Gitee release 还没建好，应用会自动回退到 GitHub 源（国内可能较慢或被墙）。
+
 
 ## ⚠️ 关于 `realesrgan_x2_v1` 的重要提醒
 

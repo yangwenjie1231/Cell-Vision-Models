@@ -1,8 +1,12 @@
 {
-  "$comment": "YWJCell 用户端推理模型清单。应用按 ai.model.downloadBase + '/' + file 下载。",
+  "$comment": "YWJCell 用户端推理模型清单。应用按 <base>/<modelId>.onnx 下载，多源按顺序回退。",
   "version": 1,
-  "basePath": "https://github.com/yangwenjie1231/Cell-Vision-Models/releases/download/v1",
-  "mirrorHint": "国内可换成 Gitee 对应 release 地址；保持文件名一致即可。",
+  "basePaths": [
+    "https://gitee.com/ywjgame/Cell-Vision-Models/releases/download/v1",
+    "https://github.com/yangwenjie1231/Cell-Vision-Models/releases/download/v1"
+  ],
+  "mirrorHint": "Gitee 优先（国内快）→ GitHub 兜底。Gitee 不自动同步 Release，需手动传附件（见 README）。",
+  "whyReleaseAsset": "Gitee 社区版仓库单文件上限 50MB，模型 64MB 放不进仓库；附件上限 100MB，故走 Release 附件。",
   "models": [
     {
       "modelId": "realesrgan_x2_v1",
